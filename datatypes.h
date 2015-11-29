@@ -3,8 +3,8 @@
 
 typedef enum BOOL_
 {
-	FALSE,
-	TRUE
+	FALSE = 0,
+	TRUE = !FALSE
 }BOOL;
 
 

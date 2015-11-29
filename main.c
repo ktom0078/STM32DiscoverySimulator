@@ -14,6 +14,7 @@
 #include "gpio.h"
 #include "LIS3DSH.h"
 #include "stdio.h"
+#include "communication.h"
 
 volatile uint32_t ticker, downTicker;
 
@@ -70,7 +71,7 @@ int main(void)
 
 	while (1)
 	{
-		if(ticker == 1000)
+		/*if(ticker == 1000)
 		{
 			xg = LIS3DSH_Get_X_Out(LIS3DSH_Sense_2g);
 			yg = LIS3DSH_Get_Y_Out(LIS3DSH_Sense_2g);
@@ -80,9 +81,8 @@ int main(void)
 			VCP_send_str(buff);
 
 			ticker = 0;
-		}
-
-
+		}*/
+		UartMsgProc();
 
 	}
 
