@@ -20,7 +20,7 @@ void UartGetStatus(char param)
 	lbutton = (button == TRUE) ? 1 : 0;
 	ltemp = GetTemp();
 
-	sprintf(buff,"x:%.3f,y:%.3f,z:%.3f,t:%.3f,b:%d \r\n",xg,yg,zg,ltemp,lbutton);
+	sprintf(buff,"s,x:%.3f,y:%.3f,z:%.3f,t:%.3f,b:%d \r\n",xg,yg,zg,ltemp,lbutton);
 
 	VCP_send_str(buff);
 
@@ -29,20 +29,26 @@ void UartGetStatus(char param)
 void UartToogleLed(char param)
 {
 	BOOL LedError = FALSE;
+	int8_t buff[30];
+	int8_t LedString[10];
 	DISCOVERY_OUTPUT_PINS_T tled;
 	switch (param)
 	{
 		case 'b':
 			tled = DISCOVERY_LED_BLUE;
+			strcpy(LedString,"Blue");
 			break;
 		case 'g':
 			tled = DISCOVERY_LED_GREEN;
+			strcpy(LedString,"Green");
 			break;
 		case 'r':
 			tled = DISCOVERY_LED_RED;
+			strcpy(LedString,"Red");
 			break;
 		case 'o':
 			tled = DISCOVERY_LED_ORANGE;
+			strcpy(LedString,"Orange");
 			break;
 		default:
 			LedError = TRUE;
@@ -52,11 +58,12 @@ void UartToogleLed(char param)
 	if(LedError == FALSE)
 	{
 		GpioToggleLed(tled);
-		VCP_send_str("Toggling Led");
+		sprintf(buff,"t,Toggling Led: %s",LedString);
+		VCP_send_str(buff);
 	}
 	else
 	{
-		VCP_send_str("Error Toggling Led");
+		VCP_send_str("t,Error in Toggling Led");
 	}
 
 }
