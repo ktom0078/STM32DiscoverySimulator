@@ -2,6 +2,8 @@
 #include "datatypes.h"
 #include "stm32f4xx_rcc.h"
 
+BOOL button = FALSE;
+
 void GpioInit()
 {
 
@@ -45,7 +47,7 @@ BOOL GpioGetButtonState()
 
 	if (GPIO_ReadInputDataBit(GPIO_PORT_BUTTON, GPIO_BUTTON) != Bit_RESET)
 	{
-		for(delay = 0;delay < 1500000; delay++) asm volatile("nop");
+		for(delay = 0;delay < 150; delay++) asm volatile("nop");
 		if (GPIO_ReadInputDataBit(GPIO_PORT_BUTTON, GPIO_BUTTON) != Bit_RESET)
 		{
 			retval = TRUE;

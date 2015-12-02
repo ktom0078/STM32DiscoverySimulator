@@ -23,6 +23,8 @@ typedef enum DISCOVERY_OUTPUT_PINS_
 	DISCOVERY_LED_BLUE
 }DISCOVERY_OUTPUT_PINS_T;
 
+extern BOOL button;
+
 void GpioInit();
 BOOL GpioGetButtonState();
 BOOL GpioToggleLed(DISCOVERY_OUTPUT_PINS_T ledx);

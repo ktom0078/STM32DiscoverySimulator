@@ -3,10 +3,27 @@
 #include "string.h"
 #include "gpio.h"
 #include "datatypes.h"
+#include "LIS3DSH.h"
+#include <stdio.h>
+#include "tempsens.h"
 
 void UartGetStatus(char param)
 {
-	VCP_send_str("In UsartGetStatus! \r\n");
+	int8_t lbutton;
+	int8_t buff[50];
+	float xg,yg,zg,ltemp;
+
+	xg = LIS3DSH_Get_X_Out(LIS3DSH_Sense_2g);
+	yg = LIS3DSH_Get_Y_Out(LIS3DSH_Sense_2g);
+	zg = LIS3DSH_Get_Z_Out(LIS3DSH_Sense_2g);
+
+	lbutton = (button == TRUE) ? 1 : 0;
+	ltemp = GetTemp();
+
+	sprintf(buff,"x:%.3f,y:%.3f,z:%.3f,t:%.3f,b:%d \r\n",xg,yg,zg,ltemp,lbutton);
+
+	VCP_send_str(buff);
+
 }
 
 void UartToogleLed(char param)

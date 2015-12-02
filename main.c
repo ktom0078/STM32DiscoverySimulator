@@ -15,6 +15,7 @@
 #include "LIS3DSH.h"
 #include "stdio.h"
 #include "communication.h"
+#include "tempsens.h"
 
 volatile uint32_t ticker, downTicker;
 
@@ -56,14 +57,13 @@ void OTG_FS_WKUP_IRQHandler(void);
 
 int main(void)
 {
-	int8_t buff[25];
-	float xg,yg,zg;
 
 	/* Set up the system clocks */
 	SystemInit();
 	LIS3DSH_Init();
 	LIS3DSH_Write( 0x20, 0x67 );   //enable x,y,z 100hz output data rate
 	LIS3DSH_Write( 0x23, 0xC8 );   //DRY active high on INT1 pin - nem feltetlenul kell
+	InitTempSens();
 
 	/* Initialize USB, IO, SysTick, and all those other things you do in the morning */
 	init();
@@ -71,19 +71,7 @@ int main(void)
 
 	while (1)
 	{
-		/*if(ticker == 1000)
-		{
-			xg = LIS3DSH_Get_X_Out(LIS3DSH_Sense_2g);
-			yg = LIS3DSH_Get_Y_Out(LIS3DSH_Sense_2g);
-			zg = LIS3DSH_Get_Z_Out(LIS3DSH_Sense_2g);
-			sprintf(buff,"x:%.3f,y:%.3f,z:%.3f \r\n",xg,yg,zg);
-
-			VCP_send_str(buff);
-
-			ticker = 0;
-		}*/
 		UartMsgProc();
-
 	}
 
 	return 0;
@@ -146,9 +134,13 @@ void SysTick_Handler(void)
 	{
 		downTicker--;
 	}
-	if(GpioGetButtonState() == TRUE)
+	if(GpioGetButtonState() == FALSE)
 	{
-		GpioToggleLed(DISCOVERY_LED_GREEN);
+		button = FALSE;
+	}
+	else
+	{
+		button = TRUE;
 	}
 
 }
