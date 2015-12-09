@@ -88,8 +88,8 @@
     <File name="cmsis_lib/source/stm32f4xx_usart.c" path="cmsis_lib/source/stm32f4xx_usart.c" type="1"/>
     <File name="LIS3DSH_HW.c" path="LIS3DSH_HW.c" type="1"/>
     <File name="usb_lib/otg/usb_defines.h" path="usb_lib/otg/usb_defines.h" type="1"/>
-    <File name="usb_lib/cdc" path="" type="2"/>
     <File name="usb_lib/core/usbd_req.c" path="usb_lib/core/usbd_req.c" type="1"/>
+    <File name="usb_lib/cdc" path="" type="2"/>
     <File name="usb_lib/cdc/usbd_cdc_vcp.c" path="usb_lib/cdc/usbd_cdc_vcp.c" type="1"/>
     <File name="cmsis_boot" path="" type="2"/>
     <File name="cmsis_lib/include/stm32f4xx_usart.h" path="cmsis_lib/include/stm32f4xx_usart.h" type="1"/>
@@ -129,9 +129,9 @@
     <File name="usb_conf/usb_conf.h" path="usb_conf/usb_conf.h" type="1"/>
     <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
     <File name="usb_lib/otg/usb_core.c" path="usb_lib/otg/usb_core.c" type="1"/>
-    <File name="usb_lib/core/usbd_ioreq.c" path="usb_lib/core/usbd_ioreq.c" type="1"/>
     <File name="usb_lib/otg/usb_dcd.h" path="usb_lib/otg/usb_dcd.h" type="1"/>
     <File name="datatypes.h" path="datatypes.h" type="1"/>
+    <File name="usb_lib/core/usbd_ioreq.c" path="usb_lib/core/usbd_ioreq.c" type="1"/>
     <File name="usb_lib/cdc/usbd_cdc_core.c" path="usb_lib/cdc/usbd_cdc_core.c" type="1"/>
     <File name="usb_conf/usbd_desc.h" path="usb_conf/usbd_desc.h" type="1"/>
     <File name="usb_conf/usb_bsp.h" path="usb_conf/usb_bsp.h" type="1"/>

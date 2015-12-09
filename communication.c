@@ -9,18 +9,25 @@
 
 void UartGetStatus(char param)
 {
-	int8_t lbutton;
-	int8_t buff[50];
+	int8_t tbutton[12];
+	int8_t buff[COMM_BUFFER_LEN];
 	float xg,yg,zg,ltemp;
 
 	xg = LIS3DSH_Get_X_Out(LIS3DSH_Sense_2g);
 	yg = LIS3DSH_Get_Y_Out(LIS3DSH_Sense_2g);
 	zg = LIS3DSH_Get_Z_Out(LIS3DSH_Sense_2g);
 
-	lbutton = (button == TRUE) ? 1 : 0;
+	if(button == FALSE)
+	{
+		sprintf(tbutton,"NotPressed");
+	}
+	else
+	{
+		sprintf(tbutton,"Pressed");
+	}
 	ltemp = GetTemp();
 
-	sprintf(buff,"s,x:%.3f,y:%.3f,z:%.3f,t:%.3f,b:%d \r\n",xg,yg,zg,ltemp,lbutton);
+	sprintf(buff,"s,x:%.3f,y:%.3f,z:%.3f,b:%s,t:%.3f\n",xg,yg,zg,tbutton,ltemp);
 
 	VCP_send_str(buff);
 
@@ -58,12 +65,12 @@ void UartToogleLed(char param)
 	if(LedError == FALSE)
 	{
 		GpioToggleLed(tled);
-		sprintf(buff,"t,Toggling Led: %s",LedString);
+		sprintf(buff,"t,Toggling Led: %s\n",LedString);
 		VCP_send_str(buff);
 	}
 	else
 	{
-		VCP_send_str("t,Error in Toggling Led");
+		VCP_send_str("t,Error in Toggling Led\n");
 	}
 
 }
